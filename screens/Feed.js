@@ -40,7 +40,7 @@ export default class Feed extends Component {
       }
 
       renderItem = ({ item: post }) => {
-        return <PostCard post={post} />;
+        return <PostCard post={post} navigation={this.props.navigation} />;
       };
 
       keyExtractor = (item, index) => index.toString();
@@ -80,7 +80,7 @@ export default class Feed extends Component {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: "black"
+      backgroundColor: "#525452"
     },
     droidSafeArea: {
       marginTop: Platform.OS === "android" ? StatusBar.currentHeight : RFValue(35)

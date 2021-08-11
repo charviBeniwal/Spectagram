@@ -7,6 +7,7 @@ import {
     Platform,
     StatusBar,
     Image,
+    TouchableOpacity,
     Dimensions
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -40,33 +41,42 @@ export default class PostCard extends Component {
             return <AppLoading />;
         } else {
             return (
-                <View style={styles.container}>
-                    <View style={styles.cardContainer}>
-                        <View style={styles.authorContainer}>
-                            <View style={styles.authorImageContainer}>
-                                <Image
-                                    source={require("../assets/profile_img.png")}
-                                    style={styles.profileImage}
-                                ></Image>
+                <TouchableOpacity
+                    style={styles.container}
+                    onPress={() =>
+                        this.props.navigation.navigate("PostScreen", {
+                            story: this.props.post
+                        })
+                    }
+                >
+                    <View style={styles.container}>
+                        <View style={styles.cardContainer}>
+                            <View style={styles.authorContainer}>
+                                <View style={styles.authorImageContainer}>
+                                    <Image
+                                        source={require("../assets/profile_img.png")}
+                                        style={styles.profileImage}
+                                    ></Image>
+                                </View>
+                                <View style={styles.authorNameContainer}>
+                                    <Text style={styles.authorNameText}> {this.props.post.author}</Text>
+                                </View>
                             </View>
-                            <View style={styles.authorNameContainer}>
-                                <Text style={styles.authorNameText}> {this.props.post.author}</Text>
+                            <Image source={require("../assets/post.jpeg")} style={styles.postImage} />
+                            <View style={styles.captionContainer}>
+                                <Text style={styles.captionText}>
+                                    {this.props.post.caption}
+                                </Text>
                             </View>
-                        </View>
-                        <Image source={require("../assets/post.jpeg")} style={styles.postImage} />
-                        <View style={styles.captionContainer}>
-                            <Text style={styles.captionText}>
-                                {this.props.post.caption}
-                            </Text>
-                        </View>
-                        <View style={styles.actionContainer}>
-                            <View style={styles.likeButton}>
-                                <Ionicons name={"heart"} size={RFValue(30)} color={"white"} />
-                                <Text style={styles.likeText}>12k</Text>
+                            <View style={styles.actionContainer}>
+                                <View style={styles.likeButton}>
+                                    <Ionicons name={"heart"} size={RFValue(30)} color={"white"} />
+                                    <Text style={styles.likeText}>12k</Text>
+                                </View>
                             </View>
                         </View>
                     </View>
-                </View>
+                </TouchableOpacity>
 
             );
         }
@@ -79,18 +89,16 @@ const styles = StyleSheet.create({
     },
     cardContainer: {
         margin: RFValue(13),
-        backgroundColor: "#2f345d",
+        backgroundColor: "black",
         borderRadius: RFValue(20)
     },
 
     authorContainer: {
-        
-        backgroundColor: "#2f345d",
+        backgroundColor: "black",
         borderRadius: RFValue(8)
     },
     authorImageContainer: {
-        
-        backgroundColor: "#2f345d",
+        backgroundColor: "black",
         borderRadius: RFValue(8)
     },
     profileImage: {
